@@ -80,8 +80,8 @@ from slack_sdk.webhook import WebhookClient
 
 # Webhooks & accounts
 ```
-sally_p = 'https://hooks.slack.com/services/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'
-chat = 'https://hooks.slack.com/services/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'
+sally_p = 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+chat = 'https://hooks.slack.com/services/XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 
 #Account name for Slack Message and SQL filter
 account_name = 'XXX'
