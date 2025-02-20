@@ -11,17 +11,20 @@
 * message
 
 #Import libraries
+
 import warnings
 warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd
 
 #from subprocess import check_output
+
 import datetime
 from datetime import date,timedelta
 now = datetime.datetime.now()
 
 #Date Selectors
+
 yesterday_date = date.today() - timedelta(days = 1)
 yesterday = str(yesterday_date)
 print(yesterday)
@@ -51,6 +54,7 @@ import base64
 import csv
 
 #Connect to DB
+
 import urllib
 import pyodbc
 import sqlalchemy
