@@ -10,8 +10,9 @@
 * comparison metrics
 * message
 
-#Import libraries
 
+# Import libraries
+```
 import warnings
 warnings.filterwarnings("ignore")
 import numpy as np
@@ -22,9 +23,10 @@ import pandas as pd
 import datetime
 from datetime import date,timedelta
 now = datetime.datetime.now()
+```
 
-#Date Selectors
-
+# Date Selectors
+```
 yesterday_date = date.today() - timedelta(days = 1)
 yesterday = str(yesterday_date)
 print(yesterday)
@@ -47,50 +49,58 @@ last_year = str(last_year_date)
 
 yesterday_day = yesterday_date.strftime('%A')
 print(yesterday_day)
-
+```
+```
 import os
 import imaplib
 import base64
 import csv
-
-#Connect to DB
-
+```
+# Connect to DB
+```
 import urllib
 import pyodbc
 import sqlalchemy
 from sqlalchemy import MetaData, Table, Column, Integer, String, Float, Date, create_engine, event, update, DateTime
 from sqlalchemy.orm import sessionmaker
 import json
-params = urllib.parse.quote_plus("DRIVER={SQL Server};SERVER=daazure1.database.windows.net,1433;DATABASE=DA_Improvado;UID=daadmin;PWD=bObsp0ng")
+params = urllib.parse.quote_plus("DRIVER={SQL Server};SERVER=XXX.database.windows.net,XXXX;DATABASE=XXXXo;UID=XXX;PWD=XXX")
 engine = create_engine("mssql+pyodbc:///?odbc_connect=%s" % params)
 
 meta=MetaData()
-
+```
+```
 #Slack connections
 #import slack
 #import slack_sdk
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 from slack_sdk.webhook import WebhookClient
+```
 
-#webhooks
+# Webhooks & accounts
+```
 sally_p = 'https://hooks.slack.com/services/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'
 chat = 'https://hooks.slack.com/services/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'
 
 #Account name for Slack Message and SQL filter
 account_name = 'XXX'
 google_ads_id = 'XXXXX'
-
-#Google Ads Purchases & Revenue / Goal: ''
-#GA Transaction / Goal: Usually 'transactions'
+```
+# Google Ads Purchases & Revenue / Goal: ''
+# GA Transaction / Goal: Usually 'transactions'
+```
 clicks = 'clicks'
 conversions = 'purchases'
 conversion_value = 'revenue'
-
-#slack inputs for webhook
+```
+# Slack inputs for webhook
+```
 slack_channel = sally_p
 webhook = WebhookClient(slack_channel)
+```
 
+```
 sql_statement = """
 SELECT date AS date, 
     SUM(clicks) AS clicks,
@@ -137,9 +147,10 @@ yesterday_cvr = str(round(yesterday_df.iloc[0][4] * 100,2)) + '%'
 print(yesterday_cvr)
 yesterday_roas = str(round(yesterday_roas_df* 100)) + '%'
 print(yesterday_roas)
+```
 
 ## Last Four Week Comparison
-
+```
 sql_statement_weeks_comp = """
 SELECT date AS date, 
     SUM(clicks) AS clicks,
@@ -167,8 +178,10 @@ last_four_weeks_spend_df = pd.read_sql(last_four_weeks_spend_sql, con = engine)
 
 weeks_comp_df
 last_four_weeks_spend_df
+```
 
 ## Average Calculation 
+```
 four_week_averages = weeks_comp_df.mean()
 four_week_averages['spend'] = round(last_four_weeks_spend_df['spend'].mean())
 four_week_averages['CVR'] = four_week_averages['purchases'] / four_week_averages['clicks']
@@ -190,8 +203,10 @@ four_week_average_spend = '$' + '{:,}'.format(int(round(four_week_averages['spen
 print(four_week_average_spend)
 four_week_average_roas = str(round(four_week_averages['ROAS']*100)) +'%'
 print(four_week_average_roas)
+```
 
 ## Comparisons (YoY vs Last 4 Weeks)
+```
 vs_4w_clicks_int = int(round(float((yesterday_df['clicks'] - four_week_averages['clicks']) / four_week_averages['clicks']) * 100,0))
 vs_4w_clicks = str(vs_4w_clicks_int)
 print(vs_4w_clicks)
@@ -231,8 +246,10 @@ plus_minus_revenue = plus_minus(vs_4w_revenue_int)
 plus_minus_spend = plus_minus(vs_4w_spend_int)
 plus_minus_cvr = plus_minus(vs_4w_cvr_int)
 plus_minus_roas = plus_minus(vs_4w_roas_int)
+```
 
 ## Message
+```
 message_intro = ':canary: Yesterday Recap for *' + account_name + '* - Paid Search'
 
 message_spend = '*Spend:* ' + yesterday_spend + ' | ' + plus_minus_spend + vs_4w_spend + '% vs Avg Last 4 ' + yesterday_day + 's (' + four_week_average_spend + ')' 
@@ -334,3 +351,4 @@ def main():
     assert response.body == "ok"
 
 main()
+```
