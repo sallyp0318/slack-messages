@@ -1,6 +1,7 @@
 ## Automated Performance Alerts via Slack (Python)
 
-## Real-time messages on performance connecting data from SQL database and Slack API to provide timely client service and increase internal efficiency.
+Real-time messages on performance connecting data from SQL database and Slack API to provide timely client service and increase internal efficiency.
+
 
 ## This code includes
 
